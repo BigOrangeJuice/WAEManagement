@@ -1,5 +1,9 @@
 package Homework_WAEManagement;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -12,7 +16,7 @@ public class Main {
 
         //提前创建好学生集合和教工集合
         List<Person> students = new ArrayList<>(MAX);
-        List<Teacher> teachers = new ArrayList<>(MAX);
+        List<Person> teachers = new ArrayList<>(MAX);
 
         while (true) {
             //主选择界面
@@ -62,9 +66,12 @@ public class Main {
                         case 6://统计功能
                             Student.statistics(students);
                             break;
-                        case 7://保存功能
-                            break;
-                        case 8://检测功能
+                        case 7://获取功能
+                            try {
+                                MyFile.read(new Student());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                             break;
                         case 0://返回上一级
                             continue;
@@ -72,37 +79,69 @@ public class Main {
                             System.out.println("尊敬的用户，您的输入有误，请按照规定重新输入！");
                             break;
                     }
+                    MyFile.write(students);
                     break;
                 case 2:
+                    //教工选择界面
                     teacherShowMenu();
                     int T_select = 0;
                     T_select = sc.nextInt();
                     switch (T_select) {
                         case 1://添加功能
+                            Teacher teacher = new Teacher();
+                            teacher.plus(students, sc);
+                            teachers.add(teacher);
                             break;
                         case 2://查询功能
+                            System.out.println("请输入你想要查找的教工姓名：");
+                            String nameQuery = sc.next();
+                            if (Person.judgeExist(teachers, nameQuery)) {
+                                System.out.println("找到此人！");
+                                Teacher.query(teachers, nameQuery);
+                            } else System.out.println("抱歉，此人不存在！");
                             break;
                         case 3://显示功能
+                            Teacher.show(teachers);
                             break;
                         case 4://编辑功能
+                            System.out.println("请输入你想要编辑的教工姓名：");
+                            String nameModify = sc.next();
+                            if (Person.judgeExist(teachers, nameModify)) {
+                                System.out.println("找到此人！");
+                                Teacher.modify(teachers, nameModify, sc);
+                            } else System.out.println("抱歉，此人不存在！");
                             break;
                         case 5://删除功能
+                            System.out.println("请输入你想要删除的教工姓名：");
+                            String nameDelete = sc.next();
+                            if (Person.judgeExist(teachers, nameDelete)) {
+                                System.out.println("找到此人！");
+                                Teacher.delete(teachers, nameDelete, sc);
+                            } else System.out.println("抱歉，此人不存在！");
                             break;
                         case 6://统计功能
+                            Teacher.statistics(teachers);
                             break;
-                        case 7://保存功能
-                            break;
-                        case 8://检测功能
+                        case 7://获取功能
+                            try {
+                                MyFile.read(new Teacher());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                             break;
                         case 0://返回上一级
                             continue;
+                        default:
+                            System.out.println("尊敬的用户，您的输入有误，请按照规定重新输入！");
+                            break;
                     }
-                    break;
+                    MyFile.write(teachers);
+                    break ;
                 case 0:
-                    System.out.println("感谢您的使用，欢迎再来！");
+                    System.out.println("感谢你的使用，欢迎再来！！！");
                     return;
                 default:
-                    System.out.println("尊敬的用户，您的输入有误，请按照规定重新输入！");
+                    System.out.println("抱歉您的输入有误，请按照规定重新输入！");
                     break;
             }
         }
@@ -132,8 +171,7 @@ public class Main {
         System.out.println("        4 - 编辑指定学生信息");
         System.out.println("        5 - 删除指定学生信息");
         System.out.println("        6 - 统计学生信息");
-        System.out.println("        7 - 保存学生信息");
-        System.out.println("        8 - 读取学生信息");
+        System.out.println("        7 - 获取文本信息");
         System.out.println("        0 - 返回上一级");
         System.out.println("********************************************");
     }
@@ -147,8 +185,7 @@ public class Main {
         System.out.println("        4 - 编辑指定教工信息");
         System.out.println("        5 - 删除指定教工信息");
         System.out.println("        6 - 统计教工信息");
-        System.out.println("        7 - 保存教工信息");
-        System.out.println("        8 - 读取教工信息");
+        System.out.println("        7 - 获取文本信息");
         System.out.println("        0 - 返回上一级");
         System.out.println("********************************************");
     }
