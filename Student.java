@@ -29,7 +29,7 @@ public class Student extends Person {
 
     //添加学生信息
     public void plus(List<Person> students,Scanner scanner) {
-        System.out.println("请输入你想要输入的学生信息：");
+        System.out.println("请输入你想要添加的学生信息：");
 
         System.out.println("学号：         请输入12位有效数字");
         while(this.getId() == 0) {
@@ -52,7 +52,7 @@ public class Student extends Person {
             if(ToolClass.styleSex(sex)) this.setSex(sex);
             else System.out.println("---抱歉，你的输入格式有误，请重新输入---");
         }
-        System.out.println("专业班级：      格式：专业-班级");
+        System.out.println("专业班级：      格式：专业-班级" + "(尽可能短而见名知义，专业名控制在3-4个字)");
         while(this.proClass == null) {
             String proClass = scanner.next() ;
             if(ToolClass.styleProClass(proClass))   this.setProClass(proClass);
@@ -68,16 +68,18 @@ public class Student extends Person {
 
         while(electric.getConsumption() == 0.0){
             double consumption = scanner.nextDouble() ;
+            if(consumption == 0.0) consumption = 0.000001 ;
             if(ToolClass.styleConsumption(consumption))    electric.setConsumption(consumption);
             else System.out.println("---抱歉，你的输入格式有误，请重新输入---");
         }
+        if (electric.getConsumption() == 0.000001)  electric.setConsumption(0);
         System.out.println("是否缴费：   true - 已缴 | false - 未缴");
         String str1 = null ;
         while(str1 == null) {
             String result = scanner.next() ;
             if(result.equals("true") || result.equals("false")){
                 str1 = result ;
-                electric.setPay(Boolean.getBoolean(result)) ;
+                electric.setPay(Boolean.parseBoolean(result)) ;
             }
             else System.out.println("---抱歉，你的输入格式有误，请重新输入---");
         }
@@ -88,16 +90,18 @@ public class Student extends Person {
         System.out.println("用水量：");
         while(water.getConsumption() == 0.0){
             double consumption = scanner.nextDouble() ;
+            if(consumption == 0.0) consumption = 0.000001 ;
             if(ToolClass.styleConsumption(consumption))    water.setConsumption(consumption);
             else System.out.println("---抱歉，你的输入格式有误，请重新输入---");
         }
+        if (water.getConsumption() == 0.000001) water.setConsumption(0);
         System.out.println("是否缴费：   true - 已缴 | false - 未缴");
         String str2 = null ;
         while(str2 == null) {
             String result = scanner.next() ;
             if(result.equals("true") || result.equals("false")){
                 str2 = result ;
-                water.setPay(Boolean.getBoolean(result)) ;
+                water.setPay(Boolean.parseBoolean(result)) ;
             }
             else System.out.println("---抱歉，你的输入格式有误，请重新输入---");
         }
@@ -113,7 +117,6 @@ public class Student extends Person {
                 System.out.println("学号：" + students.get(i).getId());
                 System.out.println("姓名：" + students.get(i).getName());
                 System.out.println("性别：" + students.get(i).getSex());
-                System.out.println("专业班级：" + "\t");
                 if (students.get(i) instanceof Student) {
                     Student student = (Student) students.get(i);
                     System.out.println("专业班级：" + student.proClass);
@@ -122,12 +125,12 @@ public class Student extends Person {
                     if (j == 0) {
                         System.out.println("用电量：" + students.get(i).getConsumptions().get(j).getConsumption() + " 度");
                         System.out.printf("应交电费：%.2f 元\n",students.get(i).getConsumptions().get(j).getConsumption()*0.588);
-                        System.out.println("是否缴电费：" + (students.get(i).getConsumptions().get(j).isPay() == true ? "已缴" : "未缴"));
+                        System.out.println("是否缴电费：" + (students.get(i).getConsumptions().get(j).isPay() ? "已缴" : "未缴"));
                     }
                     if (j == 1) {
                         System.out.println("用水量：" + students.get(i).getConsumptions().get(j).getConsumption() + " 千升");
                         System.out.printf("应交水费：%.2f 元\n",students.get(i).getConsumptions().get(j).getConsumption()*3.10);
-                        System.out.println("是否缴水费：" + (students.get(i).getConsumptions().get(j).isPay() == true ? "已缴" : "未缴"));
+                        System.out.println("是否缴水费：" + (students.get(i).getConsumptions().get(j).isPay() ? "已缴" : "未缴"));
                     }
                 }
             }
@@ -144,7 +147,6 @@ public class Student extends Person {
             System.out.println("学号：" + students.get(i).getId());
             System.out.println("姓名：" + students.get(i).getName());
             System.out.println("性别：" + students.get(i).getSex());
-            System.out.println("专业班级：" + "\t");
             if (students.get(i) instanceof Student) {
                 Student student = (Student) students.get(i);
                 System.out.println("专业班级：" + student.proClass);
@@ -207,7 +209,7 @@ public class Student extends Person {
                             else System.out.println("---抱歉，你的输入格式有误，请重新输入---");
                         }
 
-                        System.out.println("专业班级：      格式：专业-班级");
+                        System.out.println("专业班级：      格式：专业-班级" + "(尽可能短而见名知义，专业名控制在3-4个字)");
                         if (students.get(i) instanceof Student) {
                             Student student = (Student) students.get(i);
                             while (student.proClass == null) {
@@ -234,7 +236,7 @@ public class Student extends Person {
                             String result = scanner.next() ;
                             if(result.equals("true") || result.equals("false")){
                                 str1 = result ;
-                                electric.setPay(Boolean.getBoolean(result)) ;
+                                electric.setPay(Boolean.parseBoolean(result)) ;
                             }
                             else System.out.println("---抱歉，你的输入格式有误，请重新输入---");
                         }
@@ -254,7 +256,7 @@ public class Student extends Person {
                             String result = scanner.next() ;
                             if(result.equals("true") || result.equals("false")){
                                 str2 = result ;
-                                water.setPay(Boolean.getBoolean(result)) ;
+                                water.setPay(Boolean.parseBoolean(result)) ;
                             }
                             else System.out.println("---抱歉，你的输入格式有误，请重新输入---");
                         }
