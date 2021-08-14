@@ -1,16 +1,12 @@
 package Homework_WAEManagement;
 
+//消费类
 public class Consumption {
     private double consumption;    //  用量
     private boolean pay;          //  是否缴费
 
-    //以下为构造器 - 无参的和有参的
+    //以下为构造器 - 无参的
     public Consumption() {
-    }
-
-    public Consumption(double consumption, boolean pay) {
-        this.consumption = consumption;
-        this.pay = pay;
     }
 
     //以下为setter and getter
