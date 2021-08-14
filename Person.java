@@ -3,7 +3,8 @@ package Homework_WAEManagement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Scanner;
+
+import static Homework_WAEManagement.MyFile.writeStatistic;
 
 //公共类为人，有共有的特性，让其继承
 public class Person {
@@ -15,13 +16,6 @@ public class Person {
 
     //以下为构造器 - 无参的和有参的
     public Person() {
-    }
-
-    public Person(long id, String name, char sex, List<Consumption> consumptions) {
-        this.id = id;
-        this.name = name;
-        this.sex = sex;
-        this.consumptions = consumptions;
     }
 
     //以下为setter and getter
@@ -64,10 +58,40 @@ public class Person {
 
     //判断此人是否存在
     public static boolean judgeExist(List<Person> people,String name){
-        for(int i = 0;i < people.size();++ i){
-            if(name.equals(people.get(i).name))  return true ;
+        for (Person person : people) {
+            if (name.equals(person.name)) return true;
         }
         return false ;
+    }
+
+    //统计学生/教工使用水电情况
+    public static void statistics(List<Person> people){
+        if (people.size() == 0) {
+            System.out.println("-- 暂无人员信息，请先手动添加 --");
+        }
+
+        //从大到小排序(下面使用的是内联变量的知识点)
+        for(int i = 0; i < people.size() - 1; ++ i){
+            for(int j = 0; j < people.size() - 1 - i; ++ j){
+                if(people.get(j).getConsumptions().get(0).getConsumption() < people.get(j+1).getConsumptions().get(0).getConsumption()){
+                    Person temp = people.get(j) ;
+                    people.set(j+1, people.get(j)) ;
+                    people.set(j,temp) ;
+                }
+            }
+        }
+        System.out.println("序列\t" + "姓名\t" + "用电量/度\t" + "用水量/m^3\t" + "电费/元\t" + "水费/元\t" + "是否缴电费\t" + "是否缴水费\t" );
+        for(int i = 0; i < people.size(); ++ i){
+            System.out.print(i+1 + "\t\t");
+            System.out.print(people.get(i).getName() + "\t");
+            System.out.printf("%.2f\t\t", people.get(i).getConsumptions().get(0).getConsumption());
+            System.out.printf("%.2f\t\t", people.get(i).getConsumptions().get(1).getConsumption());
+            System.out.printf("%.2f\t", people.get(i).getConsumptions().get(0).getConsumption()*0.588);
+            System.out.printf("%.2f\t", people.get(i).getConsumptions().get(1).getConsumption()*3.10);
+            System.out.print(people.get(i).getConsumptions().get(0).isPay() + "\t\t");
+            System.out.println(people.get(i).getConsumptions().get(1).isPay());
+        }
+        writeStatistic(people);
     }
 
     @Override
