@@ -134,25 +134,26 @@ public class Student extends Person {
     public static void show(List<Person> students) {
         if (students.size() == 0) {
             System.out.println("-- 暂无学生信息，请先手动添加 --");
-        }
-        for (int i = 0; i < students.size(); ++i) {
-            System.out.println("============ " + "No." + (i + 1) + " ============");
-            System.out.println("学号：" + students.get(i).getId());
-            System.out.println("姓名：" + students.get(i).getName());
-            System.out.println("性别：" + students.get(i).getSex());
-            if (students.get(i) instanceof Student student) {
-                System.out.println("专业班级：" + student.proClass);
-            }
-            for (int j = 0; j < students.get(i).getConsumptions().size(); ++j) {
-                if (j == 0) {
-                    System.out.println("用电量：" + students.get(i).getConsumptions().get(j).getConsumption() + " 度");
-                    System.out.printf("应交电费：%.2f 元\n",students.get(i).getConsumptions().get(j).getConsumption()*0.588);
-                    System.out.println("是否缴电费：" + (students.get(i).getConsumptions().get(j).isPay() ? "已缴" : "未缴"));
+        }else {
+            for (int i = 0; i < students.size(); ++i) {
+                System.out.println("============ " + "No." + (i + 1) + " ============");
+                System.out.println("学号：" + students.get(i).getId());
+                System.out.println("姓名：" + students.get(i).getName());
+                System.out.println("性别：" + students.get(i).getSex());
+                if (students.get(i) instanceof Student student) {   //模式变量
+                    System.out.println("专业班级：" + student.proClass);
                 }
-                if (j == 1) {
-                    System.out.println("用水量：" + students.get(i).getConsumptions().get(j).getConsumption() + " 千升");
-                    System.out.printf("应交水费：%.2f 元\n",students.get(i).getConsumptions().get(j).getConsumption()*3.10);
-                    System.out.println("是否缴水费：" + (students.get(i).getConsumptions().get(j).isPay() ? "已缴" : "未缴"));
+                for (int j = 0; j < students.get(i).getConsumptions().size(); ++j) {
+                    if (j == 0) {
+                        System.out.println("用电量：" + students.get(i).getConsumptions().get(j).getConsumption() + " 度");
+                        System.out.printf("应交电费：%.2f 元\n", students.get(i).getConsumptions().get(j).getConsumption() * 0.588);
+                        System.out.println("是否缴电费：" + (students.get(i).getConsumptions().get(j).isPay() ? "已缴" : "未缴"));
+                    }
+                    if (j == 1) {
+                        System.out.println("用水量：" + students.get(i).getConsumptions().get(j).getConsumption() + " 千升");
+                        System.out.printf("应交水费：%.2f 元\n", students.get(i).getConsumptions().get(j).getConsumption() * 3.10);
+                        System.out.println("是否缴水费：" + (students.get(i).getConsumptions().get(j).isPay() ? "已缴" : "未缴"));
+                    }
                 }
             }
         }
