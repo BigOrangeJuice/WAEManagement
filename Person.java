@@ -68,30 +68,31 @@ public class Person {
     public static void statistics(List<Person> people){
         if (people.size() == 0) {
             System.out.println("-- 暂无人员信息，请先手动添加 --");
-        }
+        }else {
 
-        //从大到小排序(下面使用的是内联变量的知识点)
-        for(int i = 0; i < people.size() - 1; ++ i){
-            for(int j = 0; j < people.size() - 1 - i; ++ j){
-                if(people.get(j).getConsumptions().get(0).getConsumption() < people.get(j+1).getConsumptions().get(0).getConsumption()){
-                    Person temp = people.get(j) ;
-                    people.set(j+1, people.get(j)) ;
-                    people.set(j,temp) ;
+            //从大到小排序(下面使用的是内联变量的知识点)
+            for (int i = 0; i < people.size() - 1; ++i) {
+                for (int j = 0; j < people.size() - 1 - i; ++j) {
+                    if (people.get(j).getConsumptions().get(0).getConsumption() < people.get(j + 1).getConsumptions().get(0).getConsumption()) {
+                        Person temp = people.get(j);
+                        people.set(j + 1, people.get(j));
+                        people.set(j, temp);
+                    }
                 }
             }
+            System.out.println("序列\t" + "姓名\t" + "用电量/度\t" + "用水量/m^3\t" + "电费/元\t" + "水费/元\t" + "是否缴电费\t" + "是否缴水费\t");
+            for (int i = 0; i < people.size(); ++i) {
+                System.out.print(i + 1 + "\t\t");
+                System.out.print(people.get(i).getName() + "\t");
+                System.out.printf("%.2f\t\t", people.get(i).getConsumptions().get(0).getConsumption());
+                System.out.printf("%.2f\t\t", people.get(i).getConsumptions().get(1).getConsumption());
+                System.out.printf("%.2f\t", people.get(i).getConsumptions().get(0).getConsumption() * 0.588);
+                System.out.printf("%.2f\t", people.get(i).getConsumptions().get(1).getConsumption() * 3.10);
+                System.out.print(people.get(i).getConsumptions().get(0).isPay() + "\t\t");
+                System.out.println(people.get(i).getConsumptions().get(1).isPay());
+            }
+            writeStatistic(people);
         }
-        System.out.println("序列\t" + "姓名\t" + "用电量/度\t" + "用水量/m^3\t" + "电费/元\t" + "水费/元\t" + "是否缴电费\t" + "是否缴水费\t" );
-        for(int i = 0; i < people.size(); ++ i){
-            System.out.print(i+1 + "\t\t");
-            System.out.print(people.get(i).getName() + "\t");
-            System.out.printf("%.2f\t\t", people.get(i).getConsumptions().get(0).getConsumption());
-            System.out.printf("%.2f\t\t", people.get(i).getConsumptions().get(1).getConsumption());
-            System.out.printf("%.2f\t", people.get(i).getConsumptions().get(0).getConsumption()*0.588);
-            System.out.printf("%.2f\t", people.get(i).getConsumptions().get(1).getConsumption()*3.10);
-            System.out.print(people.get(i).getConsumptions().get(0).isPay() + "\t\t");
-            System.out.println(people.get(i).getConsumptions().get(1).isPay());
-        }
-        writeStatistic(people);
     }
 
     @Override
