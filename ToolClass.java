@@ -47,7 +47,7 @@ public class ToolClass {
         return String.valueOf(ch).matches("[\u4e00-\u9fa5]") ;
     }
 
-    //判断专业班级
+    //判断专业班级的格式
     public static boolean styleProClass(String proClass){
         return proClass.indexOf('-') != -1;
     }
