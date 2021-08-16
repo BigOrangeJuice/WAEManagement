@@ -215,9 +215,11 @@ public class Teacher extends Person {
                         System.out.println("用电量：");
                         while(electric.getConsumption() == 0.0){
                             double consumption = scanner.nextDouble() ;
+                            if(consumption == 0.0) consumption = 0.000001 ;
                             if(ToolClass.styleConsumption(consumption))    electric.setConsumption(consumption);
                             else System.out.println("---抱歉，你的输入格式有误，请重新输入---");
                         }
+                        if (electric.getConsumption() == 0.000001)  electric.setConsumption(0);
                         System.out.println("是否缴费：   true - 已缴 | false - 未缴");
                         String str1 = null ;
                         while(str1 == null) {
@@ -235,9 +237,11 @@ public class Teacher extends Person {
                         System.out.println("用水量：");
                         while(water.getConsumption() == 0.0){
                             double consumption = scanner.nextDouble() ;
+                            if(consumption == 0.0) consumption = 0.000001 ;
                             if(ToolClass.styleConsumption(consumption))    water.setConsumption(consumption);
                             else System.out.println("---抱歉，你的输入格式有误，请重新输入---");
                         }
+                        if (water.getConsumption() == 0.000001) water.setConsumption(0);
                         System.out.println("是否缴费：   true - 已缴 | false - 未缴");
                         String str2 = null ;
                         while(str2 == null) {
