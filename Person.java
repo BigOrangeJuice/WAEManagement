@@ -14,7 +14,7 @@ public class Person {
     private List<Consumption> consumptions = new ArrayList<>() ;    //  费用及其缴费情况
 
 
-    //以下为构造器 - 无参的和有参的
+    //以下为构造器 - 无参的
     public Person() {
     }
 
