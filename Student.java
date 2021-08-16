@@ -5,7 +5,7 @@ import java.util.*;
 public class Student extends Person {
     private String proClass;       //专业班级
 
-    //以下为构造器 - 无参的和有参的
+    //以下为构造器 - 无参的
     public Student() {
     }
 
@@ -204,6 +204,7 @@ public class Student extends Person {
 
                         System.out.println("专业班级：      格式：专业-班级" + "(尽可能短而见名知义，专业名控制在3-4个字)");
                         if (students.get(i) instanceof Student student) {
+                            student.proClass = null ;
                             while (student.proClass == null) {
                                 String proClass = scanner.next();
                                 if (ToolClass.styleProClass(proClass)) student.setProClass(proClass);
@@ -219,9 +220,11 @@ public class Student extends Person {
                         System.out.println("用电量：");
                         while(electric.getConsumption() == 0.0){
                             double consumption = scanner.nextDouble() ;
+                            if(consumption == 0.0) consumption = 0.000001 ;
                             if(ToolClass.styleConsumption(consumption))    electric.setConsumption(consumption);
                             else System.out.println("---抱歉，你的输入格式有误，请重新输入---");
                         }
+                        if (electric.getConsumption() == 0.000001)  electric.setConsumption(0);
                         System.out.println("是否缴费：   true - 已缴 | false - 未缴");
                         String str1 = null ;
                         while(str1 == null) {
@@ -239,9 +242,11 @@ public class Student extends Person {
                         System.out.println("用水量：");
                         while(water.getConsumption() == 0.0){
                             double consumption = scanner.nextDouble() ;
+                            if(consumption == 0.0) consumption = 0.000001 ;
                             if(ToolClass.styleConsumption(consumption))    water.setConsumption(consumption);
                             else System.out.println("---抱歉，你的输入格式有误，请重新输入---");
                         }
+                        if (water.getConsumption() == 0.000001) water.setConsumption(0);
                         System.out.println("是否缴费：   true - 已缴 | false - 未缴");
                         String str2 = null ;
                         while(str2 == null) {
