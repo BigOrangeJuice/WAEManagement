@@ -59,6 +59,7 @@ public class Main {
                                 System.out.println("找到此人！");
                                 Student.modify(students, nameModify, sc);
                             }
+                            write(students);
                             break;
                         case 5://删除功能
                             System.out.println("请输入你想要删除的学生姓名：");
@@ -69,6 +70,7 @@ public class Main {
                                 System.out.println("找到此人！");
                                 Student.delete(students, nameDelete, sc);
                             }
+                            write(students);
                             break;
                         case 6://统计功能
                             Student.statistics(students);
@@ -119,6 +121,7 @@ public class Main {
                                 System.out.println("找到此人！");
                                 Teacher.modify(teachers, nameModify, sc);
                             } else System.out.println("抱歉，此人不存在！");
+                            write(teachers);
                             break;
                         case 5://删除功能
                             System.out.println("请输入你想要删除的教工姓名：");
@@ -129,6 +132,7 @@ public class Main {
                                 System.out.println("找到此人！");
                                 Teacher.delete(teachers, nameDelete, sc);
                             }
+                            write(teachers);
                             break;
                         case 6://统计功能
                             Teacher.statistics(teachers);
@@ -154,5 +158,6 @@ public class Main {
                 default -> System.out.println("抱歉您的输入有误，请按照规定重新输入！");
             }
         }
+
     }
 }
