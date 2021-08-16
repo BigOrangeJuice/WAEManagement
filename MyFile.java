@@ -20,13 +20,18 @@ public class MyFile {
                 bw.newLine();//换行
 
                 for (Person person : people) {
-                    if (person instanceof Student student) {
+                    if (person instanceof Student student) {    //模式变量，一步到位
                         bw.write(student.getId() + "\t");
                         bw.write(student.getName() + "\t");
                         bw.write(student.getSex() + "\t\t");
                         bw.write(student.getProClass() + "\t");
-                        bw.write(student.getConsumptions().get(0).getConsumption() + "\t\t");
-                        bw.write(student.getConsumptions().get(1).getConsumption() + "\t\t");
+                        if(student.getConsumptions().get(0).getConsumption() < 10) {
+                            bw.write(student.getConsumptions().get(0).getConsumption() + "\t\t\t");
+                            bw.write(student.getConsumptions().get(1).getConsumption() + "\t\t\t");
+                        }else {
+                            bw.write(student.getConsumptions().get(0).getConsumption() + "\t\t");
+                            bw.write(student.getConsumptions().get(1).getConsumption() + "\t\t");
+                        }
                         String EC = String.format("%.2f", student.getConsumptions().get(0).getConsumption() * 0.588);
                         bw.write(EC + "\t");
                         String WC = String.format("%.2f", student.getConsumptions().get(1).getConsumption() * 3.10);
@@ -72,8 +77,13 @@ public class MyFile {
                         bw.write(teacher.getName() + "\t");
                         bw.write(teacher.getSex() + "\t\t");
                         bw.write(teacher.getDepartment() + "\t\t\t");
-                        bw.write(teacher.getConsumptions().get(0).getConsumption() + "\t\t");
-                        bw.write(teacher.getConsumptions().get(1).getConsumption() + "\t\t");
+                        if(teacher.getConsumptions().get(0).getConsumption() < 10) {
+                            bw.write(teacher.getConsumptions().get(0).getConsumption() + "\t\t\t");
+                            bw.write(teacher.getConsumptions().get(1).getConsumption() + "\t\t\t");
+                        }else {
+                            bw.write(teacher.getConsumptions().get(0).getConsumption() + "\t\t");
+                            bw.write(teacher.getConsumptions().get(1).getConsumption() + "\t\t");
+                        }
                         String EC = String.format("%.2f", teacher.getConsumptions().get(0).getConsumption() * 0.588);
                         bw.write(EC + "\t");
                         String WC = String.format("%.2f", teacher.getConsumptions().get(1).getConsumption() * 3.10);
@@ -125,8 +135,8 @@ public class MyFile {
                         if (person instanceof Student student) {
                             bw.write((i + 1) + "\t\t");
                             bw.write(student.getName() + "\t");
-                            bw.write(student.getConsumptions().get(0).getConsumption() + "\t\t");
-                            bw.write(student.getConsumptions().get(1).getConsumption() + "\t\t");
+                            bw.write(student.getConsumptions().get(0).getConsumption() + "\t\t\t");
+                            bw.write(student.getConsumptions().get(1).getConsumption() + "\t\t\t");
                             String EC = String.format("%.2f", student.getConsumptions().get(0).getConsumption() * 0.588);
                             bw.write(EC + "\t");
                             String WC = String.format("%.2f", student.getConsumptions().get(1).getConsumption() * 3.10);
